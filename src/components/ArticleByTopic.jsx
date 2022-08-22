@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
-import { getArticles } from "../utils/index.js";
+import {useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
+import { getArticlesByTopic } from "../utils/index.js";
 
+const ArticleByTopic = (topic) => {
+    const {slug} = useParams();
 
-
-const Articles = () => {
-
-  //define article state
+    //define article state
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    getArticles().then(({ articles }) => {
+    getArticlesByTopic(slug).then(({ articles }) => {
+        console.log(articles)
       setArticles(articles);
     });
-  }, [articles]);
+  }, [slug]);
 
   return (
     <section className='Articles__grid'>
@@ -34,6 +35,8 @@ const Articles = () => {
       </ul>
     </section>
   );
+  
+
 };
 
-export default Articles;
+export default ArticleByTopic;
