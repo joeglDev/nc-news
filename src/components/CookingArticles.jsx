@@ -1,22 +1,20 @@
-import { useState, useEffect } from "react";
-import { getArticles } from "../utils/index.js";
+import {useState, useEffect} from 'react';
+import { getArticlesByTopic } from "../utils/index.js";
 
-
-
-const Articles = () => {
+const CookingArticles = () => {
 
   //define article state
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    getArticles().then(({ articles }) => {
+    getArticlesByTopic('cooking').then(({ articles }) => {
       setArticles(articles);
     });
   }, [articles]);
 
   return (
     <section className='Articles__grid'>
-      <h1 className="Articles__h1">Articles</h1>
+      <h1 className="Articles__h1">Cooking articles</h1>
       <ul>
         {articles.map((article) => {
           return (
@@ -34,6 +32,8 @@ const Articles = () => {
       </ul>
     </section>
   );
+        
+
 };
 
-export default Articles;
+export default CookingArticles;

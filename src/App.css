@@ -43,7 +43,18 @@ Nav li a:hover {
   padding: 1rem;
   text-decoration: none;
   font-weight: bold;
+  border: none;
+  fill: #333;
+}
 
+Nav select {
+  display: inline-block;
+background-color: #333;
+  text-align: center;
+  padding: 1rem;
+  text-decoration: none;
+  font-family: 'Ubuntu';
+  color: white;
 }
 
 /* Articles */
