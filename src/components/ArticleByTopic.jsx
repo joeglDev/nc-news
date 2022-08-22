@@ -1,20 +1,23 @@
 import {useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import { getArticlesByTopic } from "../utils/index.js";
 
-const CodingArticles = () => {
+const ArticleByTopic = (topic) => {
+    const {slug} = useParams();
 
-  //define article state
+    //define article state
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    getArticlesByTopic('coding').then(({ articles }) => {
+    getArticlesByTopic(slug).then(({ articles }) => {
+        console.log(articles)
       setArticles(articles);
     });
-  }, [articles]);
+  }, [slug]);
 
   return (
     <section className='Articles__grid'>
-      <h1 className="Articles__h1">Coding articles</h1>
+      <h1 className="Articles__h1">Articles</h1>
       <ul>
         {articles.map((article) => {
           return (
@@ -32,8 +35,8 @@ const CodingArticles = () => {
       </ul>
     </section>
   );
-        
+  
 
 };
 
-export default CodingArticles;
+export default ArticleByTopic;
