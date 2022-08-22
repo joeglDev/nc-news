@@ -1,38 +1,176 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+body {
   color: white;
+  background-color: #121212;
 }
 
-.App-link {
-  color: #61dafb;
+/*Navigation bar*/
+Nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+Nav li {
+  float: left;
+  fill: #333;
+}
+
+Nav li a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+Nav li a:hover {
+  background-color: rgb(55, 110, 230);
+}
+
+Nav li a:hover {
+  background-color: rgb(55, 110, 230);
+}
+
+.Navbar__li__logo {
+  color: red;
+  display: inline-block;
+  text-align: center;
+  padding: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+
+}
+
+/* Articles */
+.Articles__h1 {
+  font-size: 3rem;
+  text-align: center;
+  position: relative;
+  margin-top: 4rem;
+}
+
+.Articles__card {
+  background-color: #333;
+  color: white;
+  margin: auto;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  display: flex;
+  width: 80%;
+}
+
+.Articles__card:hover {
+  border-style: solid;
+  border-color: rgb(55, 110, 230);
+  border-width: large;
+}
+
+/* TOPICS CARDS -  update when needed*/
+.Articles_card__box__topic1 {
+  background-color: red;
+  word-wrap: break-word;
+  width: 10%;
+  text-align: center;
+  margin: 0.2rem;
+  padding: 0.2rem;
+
+}
+
+.Articles_card__box__topic2 {
+  word-wrap: break-word;
+  background-color: orange;
+  text-align: center;
+  width: 10%;
+  margin: 0.2rem;
+  padding: 0.2rem;
+}
+
+.Articles_card__box__topic3 {
+  word-wrap: break-word;
+  background-color: rgb(55, 110, 230);
+  text-align: center;
+  width: 10%;
+  margin: 0.2rem;
+  padding: 0.2rem;
+}
+
+.Articles_card__title {
+  margin-right: auto;
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: auto;
+
+}
+
+.Articles_card__author {
+  display: flex;
+  justify-content: right;
+  margin-top: auto;
+  margin-bottom: auto;
+
+}
+
+@media only screen and (max-width: 600px) {
+
+  .Articles__grid h1 {
+    font-size: 5vw;
   }
-  to {
-    transform: rotate(360deg);
+
+  .Articles_card__box__topic1 {
+    font-size: 1vw;
+    width: 10%;
   }
+
+  .Articles_card__box__topic2 {
+    font-size: 1vw;
+    width: 10%;
+  }
+
+  .Articles_card__box__topic3 {
+    font-size: 1vw;
+  }
+
+  .Articles_card__title {
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 1vw;
+
+  }
+
+  .Articles_card__author {
+    display: flex;
+    justify-content: right;
+    font-size: 1vw;
+
+  }
+
+  Nav li a {
+    padding: 1vw;
+  }
+
+  .Navbar__li__logo {
+    padding: 1vw;
+  }
+
+  .Articles__card {
+    background-color: #333;
+    color: white;
+    margin: auto;
+    margin-bottom: 1vw;
+    padding: 1vw;
+    display: flex;
+    width: 80%;
+  }
+
+  .Articles__h1 {
+    margin-top: 10vh;
+  }
+
+
+
 }
