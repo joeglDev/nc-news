@@ -23,13 +23,13 @@ const Articles = () => {
         {articles.map((article) => {
           return (
             
-            <li className='Articles__card' key={article.article_id}>
+            <article className='Articles__card' key={article.article_id}>
               <div className={article.topic === 'coding' ? 'Articles_card__box__topic1' : article.topic === 'cooking' ? 'Articles_card__box__topic2' : 'Articles_card__box__topic3'}>
                 <p>{article.topic}</p>
               </div>
-              <p className='Articles_card__title'>{article.title}</p>
+              <header className='Articles_card__title'>{article.title}</header>
               <p className='Articles_card__author'>{article.author}</p>
-              </li>
+              </article>
             
           );
         })}
