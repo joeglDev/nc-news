@@ -14,7 +14,7 @@ const Articles = () => {
     getArticles().then(({ articles }) => {
       setArticles(articles);
     });
-  }, []);
+  }, [articles]);
 
   return (
     <section className='Articles__grid'>
