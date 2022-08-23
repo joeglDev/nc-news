@@ -271,10 +271,13 @@ margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1vw;
+  width: 80%;
+  margin: auto;
 }
 
 .Single__article__header p {
-  margin-right: 2rem;
+  margin-right: 2vw;
 }
 
 .Single__Article__Stats {
@@ -334,9 +337,11 @@ h1 {
 /* like button */
 .like__button {
   color: white;
-  margin-right: 2rem;
+  margin-right: 2vw;
   border-radius: 25%;
   border: none;
+  font-weight: bold;
+  font-size: 1vw;
 }
 
 .like__button:hover {

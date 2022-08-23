@@ -37,12 +37,15 @@ const SingleArticle = () => {
     //UPDATE DATABASE
     const request = isActive === false ? { inc_votes: 1 } : { inc_votes: -1 };
     patchLike(article_id, request)
-      .then(({ updated_article }) => {
+      .then(() => {
         setErr(null);
       })
       .catch((err) => {
+        console.log(err);
+        setIsActive(false);
+        setLikes(0);
         //reset optimistic render of likes
-        setErr("Something went wrong, please try refresh and try again.");
+        setErr("Something went wrong, please refresh and try again.");
       });
   };
 
@@ -57,6 +60,9 @@ const SingleArticle = () => {
         </p>
         <p aria-description="article created date">{article_date}</p>
         <div className="Single__Article__Stats">
+          <p aria-description="number of article comments">
+            {"note- move to comment button" + article.comment_count}
+          </p>
           <button
             onClick={handleClick}
             aria-description="click to like article. Displays total number of article likes"
@@ -66,7 +72,7 @@ const SingleArticle = () => {
               (err ? " like__button__error" : "")
             }
           >
-            Like &ensp; &ensp;{likes + article.votes}
+            Like &ensp; {likes + article.votes}
             <p
               className={
                 err ? "Single__article_error" : "Single__article__no_error"
@@ -75,9 +81,6 @@ const SingleArticle = () => {
               {err}
             </p>
           </button>
-          <p aria-description="number of article comments">
-            {"note- move to comment button" + article.comment_count}
-          </p>
         </div>
         <div
           aria-description="article topic"
