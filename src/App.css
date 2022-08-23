@@ -354,4 +354,14 @@ h1 {
 }
 
 
+/* Error handling */
+.Single__article__no_error {
+  display: none;
+}
+
+.like__button__error {
+  background-color: red;
+  
+}
+
 

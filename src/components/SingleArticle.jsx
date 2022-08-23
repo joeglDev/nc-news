@@ -35,7 +35,7 @@ const SingleArticle = () => {
     setIsActive(!isActive);
 
     //UPDATE DATABASE
-    const request =  isActive === false ? { inc_votes: 1 } : { inc_votes: -1 };
+    const request = isActive === false ? { inc_votes: 1 } : { inc_votes: -1 };
     patchLike(article_id, request)
       .then(({ updated_article }) => {
         setErr(null);
@@ -48,8 +48,7 @@ const SingleArticle = () => {
       });
   };
 
-  //err handling 
-  if (err) return <h1>{err}</h1>;
+  //err handling
   //aria-description tags used in html as label not aesthetic
   return (
     <article>
@@ -64,10 +63,19 @@ const SingleArticle = () => {
             onClick={handleClick}
             aria-description="click to like article. Displays total number of article likes"
             className={
-              "like__button " + (isActive === true ? "clicked" : "not__clicked")
+              "like__button " +
+              (isActive === true ? "clicked" : "not__clicked") +
+              (err ? " like__button__error" : "")
             }
           >
             Like &ensp; &ensp;{likes + article.votes}
+            <p
+              className={
+                err ? "Single__article_error" : "Single__article__no_error"
+              }
+            >
+              {err}
+            </p>
           </button>
           <p aria-description="number of article comments">
             {"note- move to comment button" + article.comment_count}
