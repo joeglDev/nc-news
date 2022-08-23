@@ -39,8 +39,6 @@ const SingleArticle = () => {
     patchLike(article_id, request)
       .then(({ updated_article }) => {
         setErr(null);
-        //for debugging
-        console.log(updated_article);
       })
       .catch((err) => {
         //reset optimistic render of likes
