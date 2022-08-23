@@ -3,6 +3,13 @@ body {
   background-color: #121212;
 }
 
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  position: relative;
+  margin-top: 4rem;
+}
+
 a {
   text-decoration: none;
 }
@@ -59,6 +66,15 @@ Nav select {
   text-decoration: none;
   font-family: 'Ubuntu';
   color: white;
+}
+
+
+@media only screen and (max-width: 600px) {
+  Nav {
+    width: 100%;
+    font-size: 3vw;
+  }
+  
 }
 
 /* Articles */
@@ -248,3 +264,68 @@ margin: auto;
     font-size: 5vw;
   }
 }
+
+/* Single article */
+
+.Single__article__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Single__article__header p {
+  margin-right: 2rem;
+}
+
+.Single__Article__Stats {
+  display: flex;
+
+}
+
+.Single__topic {
+  width: 15%;
+  text-align: center;
+  margin: 0.2rem;
+  padding: 0.2rem;
+}
+
+.coding {
+background-color: red;
+}
+
+.cooking {
+  background-color: orange;
+}
+
+.football {
+  background-color: rgb(55, 110, 230);
+}
+
+.Single__article__body {
+  width: 75%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+.Single__article__header {
+  max-width: 600px;
+
+  font-size: 1vw;
+}
+
+.Single__topic {
+  font-size: 1vw;
+  width: 10%;
+}
+
+.Single__article__body {
+  width: 75%;
+  margin: auto;
+  font-size: 2vw;
+}
+
+h1 {
+  font-size: 5vw;
+}
+}
+
