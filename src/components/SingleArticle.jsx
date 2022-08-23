@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticle } from "../utils/index.js";
+import { patchLike } from "../utils/index.js";
+
+//note as comment like is held in state is deleted on refresh
+//error handling could be more subtle
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -18,11 +22,34 @@ const SingleArticle = () => {
 
   //handle like button click
   const [isActive, setIsActive] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [err, setErr] = useState(null);
 
   const handleClick = () => {
-    setIsActive(!isActive)
+    //OPTIMISTIC RENDERING OF LIKES
+    if (isActive === false) {
+      setLikes((likes) => likes + 1);
+    } else if (isActive === true) {
+      setLikes((likes) => likes - 1);
+    }
+    setIsActive(!isActive);
+
+    //UPDATE DATABASE
+    const request =  isActive === false ? { inc_votes: 1 } : { inc_votes: -1 };
+    patchLike(article_id, request)
+      .then(({ updated_article }) => {
+        setErr(null);
+        //for debugging
+        console.log(updated_article);
+      })
+      .catch((err) => {
+        //reset optimistic render of likes
+        setErr("Something went wrong, please try refresh and try again.");
+      });
   };
 
+  //err handling 
+  if (err) return <h1>{err}</h1>;
   //aria-description tags used in html as label not aesthetic
   return (
     <article>
@@ -33,7 +60,15 @@ const SingleArticle = () => {
         </p>
         <p aria-description="article created date">{article_date}</p>
         <div className="Single__Article__Stats">
-          <button onClick={handleClick} aria-description="click to like article. Displays total number of article likes" className={'like__button ' + (isActive === true ? 'clicked' : 'not__clicked') }>Like &ensp; &ensp;{article.votes}</button>
+          <button
+            onClick={handleClick}
+            aria-description="click to like article. Displays total number of article likes"
+            className={
+              "like__button " + (isActive === true ? "clicked" : "not__clicked")
+            }
+          >
+            Like &ensp; &ensp;{likes + article.votes}
+          </button>
           <p aria-description="number of article comments">
             {"note- move to comment button" + article.comment_count}
           </p>

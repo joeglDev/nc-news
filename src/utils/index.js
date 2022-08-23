@@ -30,4 +30,15 @@ export const getArticlesByTopic = (topic) => {
   });
 };
 
+export const patchLike = (article_id, request) => {
+  return fetch(`https://northcoders-backend-project-jg.herokuapp.com/api/articles/${article_id}`, {
+   method: "PATCH",
+   headers: {
+     "Content-Type": "application/json",
+   },
+   body: JSON.stringify(request),
+ }).then((response) => {
+   return response.json();
+ });
+ };
 
