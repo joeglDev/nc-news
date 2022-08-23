@@ -11,21 +11,35 @@ const SingleArticle = () => {
       setArticle(article);
     });
   }, [article_id]);
+
+  //process date for user
   const date = new Date(article.created_at);
   const article_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-  
-//aria-description tags used in html as label not aesthetic
+
+  //handle like button click
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => {
+    setIsActive(!isActive)
+  };
+
+  //aria-description tags used in html as label not aesthetic
   return (
     <article>
       <h1>{article.title}</h1>
       <div className="Single__article__header">
-        <p aria-description='Article author'>{"Written by: " + article.author}</p>
-        <p aria-description='article created date'>{article_date}</p>
+        <p aria-description="Article author">
+          {"Written by: " + article.author}
+        </p>
+        <p aria-description="article created date">{article_date}</p>
         <div className="Single__Article__Stats">
-          <p aria-description='number of article likes'>{'Votes: ' + article.votes}</p>
-          <p aria-description='number of article comments'>{'note- move to comment button' + article.comment_count}</p>
+          <button onClick={handleClick} aria-description="click to like article. Displays total number of article likes" className={'like__button ' + (isActive === true ? 'clicked' : 'not__clicked') }>Like &ensp; &ensp;{article.votes}</button>
+          <p aria-description="number of article comments">
+            {"note- move to comment button" + article.comment_count}
+          </p>
         </div>
-        <div aria-description='article topic'
+        <div
+          aria-description="article topic"
           className={
             "Single__topic " +
             (article.topic === "coding"
@@ -38,8 +52,8 @@ const SingleArticle = () => {
           <p>{article.topic}</p>
         </div>
       </div>
-      <div  className="Single__article__body">
-        <p aria-description='main article content'>{article.body}</p>
+      <div className="Single__article__body">
+        <p aria-description="main article content">{article.body}</p>
       </div>
     </article>
   );

@@ -279,6 +279,8 @@ margin: auto;
 
 .Single__Article__Stats {
   display: flex;
+  
+
 
 }
 
@@ -328,4 +330,28 @@ h1 {
   font-size: 5vw;
 }
 }
+
+/* like button */
+.like__button {
+  color: white;
+  margin-right: 2rem;
+  border-radius: 25%;
+  border: none;
+}
+
+.like__button:hover {
+  scale: 1.2;
+}
+
+.clicked {
+  background-color: rgb(55, 110, 230);
+  scale: 1.2;
+  
+}
+
+.not__clicked {
+  background-color: #333;
+}
+
+
 
