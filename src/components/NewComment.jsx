@@ -9,9 +9,11 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
   const [commentBody, setCommentBody] = useState("");
   const [postFailed, setPostFailed] = useState(false);
   const [emptyBody, setEmptyBody] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setIsSending(true);
 
     //UPDATE THIS OBJECT WITH USER WHEN ADDED
     const newComment = { username: "Test-user", body: commentBody };
@@ -19,6 +21,7 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
     //handle empty comment body
     if (commentBody === "") {
       setEmptyBody(true);
+      setIsSending(false);
     } else {
       setEmptyBody(false);
       postComment(article_id, newComment)
@@ -26,13 +29,21 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
           setNewComment(res);
           setNumComments(numComments + 1);
           setPostFailed(false);
+          setIsSending(false);
         })
         .catch(() => {
+          setIsSending(false);
           setPostFailed(true);
         });
     }
   };
-
+  {
+    if (isSending === true) {
+      return (
+        <div class="lds-facebook"><div></div><div></div><div></div></div>
+      );
+    }
+  }
   //if newComment is assigned to state optimistically render newComment
   {
     if (newComment.length !== 0) {
@@ -59,14 +70,18 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
             <button
               className={
                 "post__comment__button " +
-                (postFailed === true || emptyBody === true ? "postFailed" : "postOk")
+                (postFailed === true || emptyBody === true
+                  ? "postFailed"
+                  : "postOk")
               }
               onClick={onSubmit}
             >
               {emptyBody === true ? "Please enter comment text." : ""}
-              {postFailed === true ?
-                 "Sorry something went wrong. Please try again" :
-            emptyBody === true ? '' : "Post Comment"}
+              {postFailed === true
+                ? "Sorry something went wrong. Please try again"
+                : emptyBody === true
+                ? ""
+                : "Post Comment"}
             </button>
           </form>
 
@@ -102,17 +117,21 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
           ></input>
         </div>
         <button
-              className={
-                "post__comment__button " +
-                (postFailed === true || emptyBody === true ? "postFailed" : "postOk")
-              }
-              onClick={onSubmit}
-            >
-              {emptyBody === true ? "Please enter comment text." : ""}
-              {postFailed === true ?
-                 "Sorry something went wrong. Please try again" :
-            emptyBody === true ? '' : "Post Comment"}
-            </button>
+          className={
+            "post__comment__button " +
+            (postFailed === true || emptyBody === true
+              ? "postFailed"
+              : "postOk")
+          }
+          onClick={onSubmit}
+        >
+          {emptyBody === true ? "Please enter comment text." : ""}
+          {postFailed === true
+            ? "Sorry something went wrong. Please try again"
+            : emptyBody === true
+            ? ""
+            : "Post Comment"}
+        </button>
       </form>
     </>
   );
