@@ -31,14 +31,24 @@ export const getArticlesByTopic = (topic) => {
 };
 
 export const patchLike = (article_id, request) => {
-  return fetch(`https://northcoders-backend-project-jg.herokuapp.com/api/articles/${article_id}`, {
-   method: "PATCH",
-   headers: {
-     "Content-Type": "application/json",
-   },
-   body: JSON.stringify(request),
- }).then((response) => {
-   return response.json();
- });
- };
+  return fetch(
+    `https://northcoders-backend-project-jg.herokuapp.com/api/articles/${article_id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    }
+  ).then((response) => {
+    return response.json();
+  });
+};
 
+export const getComments = (article_id) => {
+  return fetch(
+    `https://northcoders-backend-project-jg.herokuapp.com/api/articles/${article_id}/comments`
+  ).then((data) => {
+    return data.json();
+  });
+};

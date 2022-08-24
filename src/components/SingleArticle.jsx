@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getArticle } from "../utils/index.js";
-import { patchLike } from "../utils/index.js";
+import { getArticle, patchLike, getComments } from "../utils/index.js";
+import Comments from "./Comments.jsx";
 
 //note as comment like is held in state is deleted on refresh
 //error handling could be more subtle
@@ -9,10 +9,20 @@ import { patchLike } from "../utils/index.js";
 const SingleArticle = () => {
   const { article_id } = useParams();
 
+  //get article
   const [article, setArticle] = useState([]);
   useEffect(() => {
     getArticle(article_id).then(({ article }) => {
       setArticle(article);
+    });
+  }, [article_id]);
+
+  //get article comments
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    getComments(article_id).then(({ comments }) => {
+      setComments(comments);
     });
   }, [article_id]);
 
@@ -60,9 +70,6 @@ const SingleArticle = () => {
         </p>
         <p aria-description="article created date">{article_date}</p>
         <div className="Single__Article__Stats">
-          <p aria-description="number of article comments">
-            {"note- move to comment button" + article.comment_count}
-          </p>
           <button
             onClick={handleClick}
             aria-description="click to like article. Displays total number of article likes"
@@ -99,6 +106,26 @@ const SingleArticle = () => {
       <div className="Single__article__body">
         <p aria-description="main article content">{article.body}</p>
       </div>
+      <Comments numComments={article.comment_count}>
+        <ul>
+          {comments.map(({ comment_id, author, body, created_at, votes }) => {
+            const date = new Date(created_at);
+            const commentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+            return (
+              <article className="Comment__card" key={comment_id}>
+                <p>{body}</p>
+
+                <div className="comment__stats">
+                  <p>{author}</p>
+                  <p>{commentDate}</p>
+                </div>
+
+                <p className="comments__votes">{votes}</p>
+              </article>
+            );
+          })}
+        </ul>
+      </Comments>
     </article>
   );
 };
