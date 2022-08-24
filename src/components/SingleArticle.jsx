@@ -106,7 +106,7 @@ const SingleArticle = () => {
       <div className="Single__article__body">
         <p aria-description="main article content">{article.body}</p>
       </div>
-      <Comments numComments={article.comment_count}>
+      <Comments numComments={article.comment_count} article_id={article_id}>
         <ul>
           {comments.map(({ comment_id, author, body, created_at, votes }) => {
             const date = new Date(created_at);

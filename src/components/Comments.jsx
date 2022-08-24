@@ -1,15 +1,19 @@
 import { useState } from "react";
+import NewComment from "./NewComment";
 
-const Comments = ({ numComments, children }) => {
+
+const Comments = ({ numComments, children, article_id }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
 
+  //REMOVE WHEN SELECT USER FUNCTIONALITY ADDED
+  const user = 'Hiroji';
+
   return (
     <section>
-   
         <button
           aria-description="button showing comment count. Click to show/hide comments."
           onClick={handleClick}
@@ -20,7 +24,7 @@ const Comments = ({ numComments, children }) => {
         >
           Comments {numComments}
         </button>
-    
+        <NewComment user={user} article_id={article_id}></NewComment>
       {isClicked && children}
     </section>
   );
