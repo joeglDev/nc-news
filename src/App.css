@@ -452,6 +452,7 @@ Nav select {
   display: flex;
 }
 
+
 .submit__comment__form input {
  margin-left: 2vw;
  margin-right: 2vw;
@@ -471,4 +472,9 @@ margin-left: auto;
 
 .postOk {
   background-color: #333;
+}
+
+.input__fail {
+  border-style: solid;
+  border-color: red;
 }
