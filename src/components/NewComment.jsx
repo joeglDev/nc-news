@@ -7,6 +7,7 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
 
   const [newComment, setNewComment] = useState([]);
   const [commentBody, setCommentBody] = useState("");
+  const [postFailed, setPostFailed] = useState(false);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -14,11 +15,15 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
     //IPDATE THIS OBJECT WITH USER WHEN ADDED
     const newComment = { username: "Test-user", body: commentBody };
 
-    postComment(article_id, newComment).then((res) => {
-      setNewComment(res);
-      setNumComments(numComments + 1);
-      console.log(numComments);
-    });
+    postComment(article_id, newComment)
+      .then((res) => {
+        setNewComment(res);
+        setNumComments(numComments + 1);
+        setPostFailed(false);
+      })
+      .catch(() => {
+        setPostFailed(true);
+      });
   };
 
   //if newComment is assigned to state optimistically render newComment
@@ -43,8 +48,16 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
                 onChange={(event) => setCommentBody(event.target.value)}
               ></input>
             </div>
-            <button className="post__comment__button" onClick={onSubmit}>
-              Post Comment
+            <button
+              className={
+                "post__comment__button " +
+                (postFailed === true ? "postFailed" : "postOk")
+              } 
+              onClick={onSubmit}
+            >
+              {postFailed === true
+                ? "Sorry something went wrong. Please try again"
+                : "Post Comment"}
             </button>
           </form>
 
@@ -78,8 +91,16 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
             onChange={(event) => setCommentBody(event.target.value)}
           ></input>
         </div>
-        <button className="post__comment__button" onClick={onSubmit}>
-          Post Comment
+        <button
+          className={
+            "post__comment__button " +
+            (postFailed === true ? "postFailed" : "postOk")
+          }
+          onClick={onSubmit}
+        >
+          {postFailed === true
+            ? "Sorry something went wrong. Please try again"
+            : "Post Comment"}
         </button>
       </form>
     </>

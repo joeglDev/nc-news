@@ -357,9 +357,7 @@ Nav select {
   scale: 1.2;
 }
 
-.not__clicked {
-  background-color: #333;
-}
+
 
 
 /* Error handling */
@@ -367,7 +365,7 @@ Nav select {
   display: none;
 }
 
-.like__button__error {
+.like__button__error::after {
   background-color: red;
 }
 
@@ -439,15 +437,15 @@ Nav select {
   color: white;
   width: 20%;
   font-size: 1.5vw;
-  background-color: #333;
+
 }
 
 .post__comment__button:hover {
-  scale: 1.2;
+  background-color:rgb(55, 110, 230);
 }
 
 .submit__comment__form {
-  background-color: #121212;
+
   color: white;
   margin: auto;
   margin-top: 2vw;
@@ -465,4 +463,12 @@ Nav select {
 .submit__comment__form__div {
   font-size: 1.5vw;
 margin-left: auto;
+}
+
+.postFailed {
+  background-color: red;
+}
+
+.postOk {
+  background-color: #333;
 }
