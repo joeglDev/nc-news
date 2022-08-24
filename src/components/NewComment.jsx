@@ -1,7 +1,7 @@
 import { postComment } from "../utils";
 import { useState } from "react";
 
-const NewComment = ({article_id }) => {
+const NewComment = ({ setNumComments, article_id, numComments }) => {
   //const newComment = { username: "hiroji", body: "merp!" }
   //might need id to
 
@@ -9,23 +9,24 @@ const NewComment = ({article_id }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const newComment = { username: 'Hiroji', body: "HIYA" };
+    const newComment = { username: "Hiroji", body: "HIYA" };
 
     postComment(article_id, newComment).then((res) => {
       setNewComment(res);
+      setNumComments(numComments + 1);
+      console.log(numComments);
     });
   };
 
   //if newComment is assigned to state optimistically render newComment
   {
-    
     if (newComment.length !== 0) {
       const { comment_id, body, author, created_at, votes } =
         newComment.comment;
 
-        //format date for readability
-        const date = new Date(created_at);
-        const commentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+      //format date for readability
+      const date = new Date(created_at);
+      const commentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 
       return (
         <>
@@ -49,7 +50,6 @@ const NewComment = ({article_id }) => {
       );
     }
   }
-
 
   //else no newComment so display form only
   return (

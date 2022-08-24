@@ -19,12 +19,14 @@ const SingleArticle = () => {
 
   //get article comments
   const [comments, setComments] = useState([]);
+  const [numComments, setNumComments] = useState(0);
 
   useEffect(() => {
     getComments(article_id).then(({ comments }) => {
       setComments(comments);
+      setNumComments(article.comment_count);
     });
-  }, [article_id]);
+  }, [article_id, article.comment_count]);
 
   //process date for user
   const date = new Date(article.created_at);
@@ -106,7 +108,11 @@ const SingleArticle = () => {
       <div className="Single__article__body">
         <p aria-description="main article content">{article.body}</p>
       </div>
-      <Comments numComments={article.comment_count} article_id={article_id}>
+      <Comments
+        setNumComments={setNumComments}
+        numComments={numComments}
+        article_id={article_id}
+      >
         <ul>
           {comments.map(({ comment_id, author, body, created_at, votes }) => {
             const date = new Date(created_at);

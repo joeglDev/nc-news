@@ -54,7 +54,6 @@ export const getComments = (article_id) => {
 };
 
 export const postComment = (article_id, request) => {
-
   return fetch(
     `https://northcoders-backend-project-jg.herokuapp.com/api/articles/${article_id}/comments`,
     {
