@@ -9,7 +9,7 @@ import Comments from "./Comments.jsx";
 const SingleArticle = () => {
   const { article_id } = useParams();
 
-  //get article
+  //get article data
   const [article, setArticle] = useState([]);
   useEffect(() => {
     getArticle(article_id).then(({ article }) => {
@@ -17,7 +17,8 @@ const SingleArticle = () => {
     });
   }, [article_id]);
 
-  //get article comments
+  //get article comments and setNumberComment state for prop drilling to new comment
+  //enables numComments to be optimistically rendered 
   const [comments, setComments] = useState([]);
   const [numComments, setNumComments] = useState(0);
 
