@@ -78,7 +78,7 @@ Nav select {
     width: 100%;
     font-size: 3vw;
   }
-  
+
 }
 
 /* Articles */
@@ -216,7 +216,7 @@ Nav select {
   font-size: 3rem;
   text-align: center;
   position: relative;
-margin: auto;
+  margin: auto;
 }
 
 .Topics_card_container a {
@@ -286,7 +286,7 @@ margin: auto;
 
 .Single__Article__Stats {
   display: flex;
-  
+
 
 
 }
@@ -299,7 +299,7 @@ margin: auto;
 }
 
 .coding {
-background-color: red;
+  background-color: red;
 }
 
 .cooking {
@@ -316,26 +316,26 @@ background-color: red;
 }
 
 @media only screen and (max-width: 600px) {
-.Single__article__header {
-  max-width: 600px;
+  .Single__article__header {
+    max-width: 600px;
 
-  font-size: 1vw;
-}
+    font-size: 1vw;
+  }
 
-.Single__topic {
-  font-size: 1vw;
-  width: 10%;
-}
+  .Single__topic {
+    font-size: 1vw;
+    width: 10%;
+  }
 
-.Single__article__body {
-  width: 75%;
-  margin: auto;
-  font-size: 2vw;
-}
+  .Single__article__body {
+    width: 75%;
+    margin: auto;
+    font-size: 2vw;
+  }
 
-h1 {
-  font-size: 5vw;
-}
+  h1 {
+    font-size: 5vw;
+  }
 }
 
 /* like button */
@@ -408,7 +408,7 @@ h1 {
   margin: auto;
   color: white;
   width: 30%;
-  margin-left: 35vw;;
+  margin-left: 35vw;
   margin-right: auto;
   font-size: 1.5vw;
 }
@@ -432,5 +432,37 @@ h1 {
   }
 }
 
+/* Post a new comment */
+.post__comment__button {
+  border: none;
+  margin-right: auto;
+  color: white;
+  width: 20%;
+  font-size: 1.5vw;
+  background-color: #333;
+}
+
+.post__comment__button:hover {
+  scale: 1.2;
+}
+
+.submit__comment__form {
+  background-color: #121212;
+  color: white;
+  margin: auto;
+  margin-top: 2vw;
+  display: flex;
+}
+
+.submit__comment__form input {
+ margin-left: 2vw;
+ margin-right: 2vw;
+ height: 1.5vw;
+}
 
 
+
+.submit__comment__form__div {
+  font-size: 1.5vw;
+margin-left: auto;
+}

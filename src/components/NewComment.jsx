@@ -6,10 +6,13 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
   //might need id to
 
   const [newComment, setNewComment] = useState([]);
+  const [commentBody, setCommentBody] = useState("");
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const newComment = { username: "Hiroji", body: "HIYA" };
+
+    //IPDATE THIS OBJECT WITH USER WHEN ADDED
+    const newComment = { username: "Test-user", body: commentBody };
 
     postComment(article_id, newComment).then((res) => {
       setNewComment(res);
@@ -30,8 +33,19 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
 
       return (
         <>
-          <form>
-            <button onClick={onSubmit}>Post Comment</button>
+          <form className="submit__comment__form">
+            <div className="submit__comment__form__div">
+              <label htmlFor="comment-body">Enter comment here:</label>
+              <input
+                htmlFor="comment-body"
+                type="text"
+                value={commentBody}
+                onChange={(event) => setCommentBody(event.target.value)}
+              ></input>
+            </div>
+            <button className="post__comment__button" onClick={onSubmit}>
+              Post Comment
+            </button>
           </form>
 
           <ul>
@@ -54,8 +68,19 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
   //else no newComment so display form only
   return (
     <>
-      <form>
-        <button onClick={onSubmit}>Post Comment</button>
+      <form className="submit__comment__form">
+        <div className="submit__comment__form__div">
+          <label htmlFor="comment-body">Enter comment here:</label>
+          <input
+            htmlFor="comment-body"
+            type="text"
+            value={commentBody}
+            onChange={(event) => setCommentBody(event.target.value)}
+          ></input>
+        </div>
+        <button className="post__comment__button" onClick={onSubmit}>
+          Post Comment
+        </button>
       </form>
     </>
   );
