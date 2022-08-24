@@ -1,7 +1,7 @@
 import { postComment } from "../utils";
 import { useState } from "react";
 
-const NewComment = ({ user, article_id }) => {
+const NewComment = ({article_id }) => {
   //const newComment = { username: "hiroji", body: "merp!" }
   //might need id to
 

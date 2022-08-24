@@ -9,9 +9,6 @@ const Comments = ({ numComments, children, article_id }) => {
     setIsClicked(!isClicked);
   };
 
-  //REMOVE WHEN SELECT USER FUNCTIONALITY ADDED
-  const user = 'Hiroji';
-
   return (
     <section>
         <button
@@ -24,7 +21,7 @@ const Comments = ({ numComments, children, article_id }) => {
         >
           Comments {numComments}
         </button>
-        <NewComment user={user} article_id={article_id}></NewComment>
+        <NewComment article_id={article_id}></NewComment>
       {isClicked && children}
     </section>
   );
