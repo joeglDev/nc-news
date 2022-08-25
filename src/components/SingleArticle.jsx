@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { getArticle, patchLike, getComments } from "../utils/index.js";
 import Comments from "./Comments.jsx";
 
+const currentUser = 'Testing'
+
 //note as comment like is held in state is deleted on refresh
 //error handling could be more subtle
 
@@ -62,6 +64,8 @@ const SingleArticle = () => {
       });
   };
 
+ 
+
   //err handling
   //aria-description tags used in html as label not aesthetic
   return (
@@ -116,6 +120,10 @@ const SingleArticle = () => {
       >
         <ul>
           {comments.map(({ comment_id, author, body, created_at, votes }) => {
+             const deleteButton = () => {
+              
+              return author === currentUser ? (<button>Delete comment</button>) : '' 
+            }
             const date = new Date(created_at);
             const commentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
             return (
@@ -126,6 +134,7 @@ const SingleArticle = () => {
                   <p>{author}</p>
                   <p>{commentDate}</p>
                 </div>
+                {deleteButton()}
 
                 <p className="comments__votes">{votes}</p>
               </article>

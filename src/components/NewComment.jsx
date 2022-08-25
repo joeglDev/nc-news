@@ -16,7 +16,7 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
     setIsSending(true);
 
     //UPDATE THIS OBJECT WITH USER WHEN ADDED
-    const newComment = { username: "Test-user", body: commentBody };
+    const newComment = { username: "Testing", body: commentBody };
 
     //handle empty comment body
     if (commentBody === "") {
