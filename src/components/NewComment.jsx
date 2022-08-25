@@ -1,5 +1,6 @@
 import { postComment } from "../utils";
 import { useState } from "react";
+const currentUser = "Testing";
 
 const NewComment = ({ setNumComments, article_id, numComments }) => {
   //const newComment = { username: "hiroji", body: "merp!" }
@@ -16,7 +17,7 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
     setIsSending(true);
 
     //UPDATE THIS OBJECT WITH USER WHEN ADDED
-    const newComment = { username: "Testing", body: commentBody };
+    const newComment = { username: currentUser, body: commentBody };
 
     //handle empty comment body
     if (commentBody === "") {
