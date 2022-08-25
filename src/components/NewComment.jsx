@@ -41,7 +41,7 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
   {
     if (isSending === true) {
       return (
-        <div class="lds-facebook"><div></div><div></div><div></div></div>
+        <div className="lds-facebook"><div></div><div></div><div></div></div>
       );
     }
   }

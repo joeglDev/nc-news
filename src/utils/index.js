@@ -67,3 +67,20 @@ export const postComment = (article_id, request) => {
     return response.json();
   });
 };
+
+export const deleteComment = (comment_id) => {
+  return fetch(
+    `https://northcoders-backend-project-jg.herokuapp.com/api/comments/${comment_id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+     // body: JSON.stringify(request),
+    }
+  ).then(() => {
+    return true
+  });
+};
+
+

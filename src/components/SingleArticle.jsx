@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getArticle, patchLike, getComments } from "../utils/index.js";
+import {
+  getArticle,
+  patchLike,
+  getComments,
+  deleteComment,
+} from "../utils/index.js";
 import Comments from "./Comments.jsx";
 
 const currentUser = "Testing";
@@ -64,6 +69,19 @@ const SingleArticle = () => {
       });
   };
 
+  const handleDeleteComment = (comment_id) => {
+    //delete comment from database
+    deleteComment(comment_id).then((res) => {
+
+      if (res) {
+      
+        console.log("comment deleted");
+      } else {
+        console.log("fail");
+      }
+    });
+  };
+
   //err handling
   //aria-description tags used in html as label not aesthetic
   return (
@@ -121,7 +139,12 @@ const SingleArticle = () => {
             //adds a comment delete button only if matches current user
             const deleteButton = () => {
               return author === currentUser ? (
-                <button className='delete__comment__button'>Delete comment</button>
+                <button
+                  className="delete__comment__button"
+                  onClick={() => handleDeleteComment(comment_id)}
+                >
+                  Delete comment
+                </button>
               ) : (
                 ""
               );
