@@ -1,6 +1,7 @@
 import { useState } from "react";
+import NewComment from "./NewComment";
 
-const Comments = ({ numComments, children }) => {
+const Comments = ({ setNumComments, numComments, children, article_id }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -9,18 +10,21 @@ const Comments = ({ numComments, children }) => {
 
   return (
     <section>
-   
-        <button
-          aria-description="button showing comment count. Click to show/hide comments."
-          onClick={handleClick}
-          className={
-            "Comments__show__button " +
-            (isClicked === true ? "clicked" : "not__clicked")
-          }
-        >
-          Comments {numComments}
-        </button>
-    
+      <button
+        aria-description="button showing comment count. Click to show/hide comments."
+        onClick={handleClick}
+        className={
+          "Comments__show__button " +
+          (isClicked === true ? "clicked" : "not__clicked")
+        }
+      >
+        Comments {numComments}
+      </button>
+      <NewComment
+        setNumComments={setNumComments}
+        numComments={numComments}
+        article_id={article_id}
+      ></NewComment>
       {isClicked && children}
     </section>
   );
