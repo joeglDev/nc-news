@@ -1,4 +1,4 @@
-import { postComment } from "../utils";
+import { postComment, deleteComment } from "../utils";
 import { useState } from "react";
 const currentUser = "Testing";
 
@@ -38,6 +38,23 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
         });
     }
   };
+
+  const handleDeleteComment = (comment_id) => {
+    setIsSending(true);
+    //delete comment from database
+    deleteComment(comment_id)
+      .then((res) => {
+        if (res) {
+          setIsSending(false);
+          setNewComment([]);
+          setNumComments(numComments - 1);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   {
     if (isSending === true) {
       return (
@@ -50,6 +67,20 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
     if (newComment.length !== 0) {
       const { comment_id, body, author, created_at, votes } =
         newComment.comment;
+
+        //delete button
+        const deleteButton = () => {
+          return author === currentUser ? (
+            <button
+              className="delete__comment__button"
+              onClick={() => handleDeleteComment(comment_id)}
+            >
+              Delete comment
+            </button>
+          ) : (
+            ""
+          );
+        };
 
       //format date for readability
       const date = new Date(created_at);
@@ -96,6 +127,7 @@ const NewComment = ({ setNumComments, article_id, numComments }) => {
               </div>
 
               <p className="comments__votes">{votes}</p>
+              {deleteButton()}
             </article>
           </ul>
         </>

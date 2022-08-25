@@ -76,11 +76,12 @@ export const deleteComment = (comment_id) => {
       headers: {
         "Content-Type": "application/json",
       },
-     // body: JSON.stringify(request),
     }
   ).then(() => {
     return true
-  });
+  }).catch((err) => {
+    return err
+  })
 };
 
 

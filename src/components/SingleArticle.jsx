@@ -28,6 +28,7 @@ const SingleArticle = () => {
   //enables numComments to be optimistically rendered
   const [comments, setComments] = useState([]);
   const [numComments, setNumComments] = useState(0);
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     getComments(article_id).then(({ comments }) => {
@@ -70,17 +71,27 @@ const SingleArticle = () => {
   };
 
   const handleDeleteComment = (comment_id) => {
+    setIsSending(true);
     //delete comment from database
-    deleteComment(comment_id).then((res) => {
-
-      if (res) {
-      
-        console.log("comment deleted");
-      } else {
-        console.log("fail");
-      }
-    });
+    deleteComment(comment_id)
+      .then((res) => {
+        if (res) {
+          setIsSending(false);
+          setNumComments(numComments - 1);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  {
+    if (isSending === true) {
+      return (
+        <div className="lds-facebook"><div></div><div></div><div></div></div>
+      );
+    }
+  }
 
   //err handling
   //aria-description tags used in html as label not aesthetic
