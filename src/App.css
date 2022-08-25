@@ -558,3 +558,17 @@ Nav select {
 .articles__filter__form button:hover {
   background-color: rgb(55, 110, 230);
 }
+
+/* delete comments */
+.delete__comment__button {
+  background-color: #222;
+  color: white;
+  font-size: 1vw;
+  margin: 2vw;
+  width: 10%;
+  border: none;
+}
+
+.delete__comment__button:hover {
+  background-color: rgb(55, 110, 230);
+}

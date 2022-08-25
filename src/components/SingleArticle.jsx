@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getArticle, patchLike, getComments } from "../utils/index.js";
+import {
+  getArticle,
+  patchLike,
+  getComments,
+  deleteComment,
+} from "../utils/index.js";
 import Comments from "./Comments.jsx";
+
+const currentUser = "Testing";
 
 //note as comment like is held in state is deleted on refresh
 //error handling could be more subtle
@@ -18,9 +25,10 @@ const SingleArticle = () => {
   }, [article_id]);
 
   //get article comments and setNumberComment state for prop drilling to new comment
-  //enables numComments to be optimistically rendered 
+  //enables numComments to be optimistically rendered
   const [comments, setComments] = useState([]);
   const [numComments, setNumComments] = useState(0);
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     getComments(article_id).then(({ comments }) => {
@@ -61,6 +69,29 @@ const SingleArticle = () => {
         setErr("Something went wrong, please refresh and try again.");
       });
   };
+
+  const handleDeleteComment = (comment_id) => {
+    setIsSending(true);
+    //delete comment from database
+    deleteComment(comment_id)
+      .then((res) => {
+        if (res) {
+          setIsSending(false);
+          setNumComments(numComments - 1);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  {
+    if (isSending === true) {
+      return (
+        <div className="lds-facebook"><div></div><div></div><div></div></div>
+      );
+    }
+  }
 
   //err handling
   //aria-description tags used in html as label not aesthetic
@@ -116,6 +147,20 @@ const SingleArticle = () => {
       >
         <ul>
           {comments.map(({ comment_id, author, body, created_at, votes }) => {
+            //adds a comment delete button only if matches current user
+            const deleteButton = () => {
+              return author === currentUser ? (
+                <button
+                  className="delete__comment__button"
+                  onClick={() => handleDeleteComment(comment_id)}
+                >
+                  Delete comment
+                </button>
+              ) : (
+                ""
+              );
+            };
+
             const date = new Date(created_at);
             const commentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
             return (
@@ -126,8 +171,8 @@ const SingleArticle = () => {
                   <p>{author}</p>
                   <p>{commentDate}</p>
                 </div>
-
                 <p className="comments__votes">{votes}</p>
+                {deleteButton()}
               </article>
             );
           })}
