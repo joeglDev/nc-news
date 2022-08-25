@@ -3,7 +3,7 @@ import Navbar from './components/Navbar.jsx';
 import Articles from './components/Articles.jsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Topics from './components/Topics.jsx';
-import ArticleByTopic from './sorting_articles/ArticleByTopic.jsx';
+import ArticleByTopic from './components/ArticleByTopic.jsx';
 import SingleArticle from './components/SingleArticle';
 
 function App() {

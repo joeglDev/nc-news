@@ -1,42 +1,40 @@
-import { useState, useEffect } from "react";
-import { getArticles } from "../utils/index.js";
-import {Link, useSearchParams} from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { getArticlesByTopic } from "../utils/index.js";
 
-
-
-const Articles = () => {
-  
-  //alter url 
+const ArticleByTopic = () => {
+    const {slug} = useParams();
+      //alter url 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  //define article state
+    //define article state
   const [articles, setArticles] = useState([]);
    //define filter states 
    const [sortBy, setSortBy] = useState('created_at');
    const [order, setOrder] = useState('desc');
 
   useEffect(() => {
-    getArticles('created_at', 'desc').then(({ articles }) => {
+    getArticlesByTopic(slug, 'created_at', 'desc').then(({ articles }) => {
       setArticles(articles);
     });
-  }, []);
+  }, [slug]);
 
-    //filter call for articles
-  const handleFormSubmit = (event) => {
+   //filter call for articles
+   const handleFormSubmit = (event) => {
     event.preventDefault();
    
 
   
     setSearchParams({sort_by: sortBy, order: order }) 
     
-    getArticles(sortBy, order).then(({ articles }) => {
+    getArticlesByTopic(slug, sortBy, order).then(({ articles }) => {
       setArticles(articles);
     });
   };
 
   return (
     <section className='Articles__grid'>
-      <h1 className="Articles__h1">Articles</h1>
+      <h1 className="Articles__h1">{slug[0].toUpperCase() + slug.substring(1)} articles</h1>
       <form className='articles__filter__form' onSubmit={handleFormSubmit}>
         <label className='articles__filter__form__element' htmlFor="sort_by">Sort by: </label>
         <select className='articles__filter__form__element' id="sort_by"  onChange={(event) => setSortBy(event.target.value)}>
@@ -69,6 +67,8 @@ const Articles = () => {
       </ul>
     </section>
   );
+  
+
 };
 
-export default Articles;
+export default ArticleByTopic;
