@@ -1,6 +1,6 @@
-export const getArticles = () => {
+export const getArticles = (sortBy, order) => {
   return fetch(
-    "https://northcoders-backend-project-jg.herokuapp.com/api/articles"
+    `https://northcoders-backend-project-jg.herokuapp.com/api/articles?sort_by=${sortBy}&order=${order}`
   ).then((data) => {
     return data.json();
   });
@@ -22,9 +22,9 @@ export const getTopics = () => {
   });
 };
 
-export const getArticlesByTopic = (topic) => {
+export const getArticlesByTopic = (topic, sort_by, order) => {
   return fetch(
-    `https://northcoders-backend-project-jg.herokuapp.com/api/articles?topic=${topic}`
+    `https://northcoders-backend-project-jg.herokuapp.com/api/articles?sort_by=${sort_by}&order=${order}&topic=${topic}`
   ).then((data) => {
     return data.json();
   });

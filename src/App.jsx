@@ -18,6 +18,7 @@ function App() {
     <Route path='articles/:article_id' element={<SingleArticle/>}></Route>
     <Route path='/articles/topics' element={<Topics/>}></Route>
     <Route path='/articles/topics/:slug' element={<ArticleByTopic/>}></Route>
+    
     </Routes>
     </BrowserRouter>
     </>

@@ -1,22 +1,54 @@
 import {useState, useEffect} from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { getArticlesByTopic } from "../utils/index.js";
 
 const ArticleByTopic = () => {
     const {slug} = useParams();
+      //alter url 
+  const [searchParams, setSearchParams] = useSearchParams();
 
     //define article state
   const [articles, setArticles] = useState([]);
+   //define filter states 
+   const [sortBy, setSortBy] = useState('created_at');
+   const [order, setOrder] = useState('desc');
 
   useEffect(() => {
-    getArticlesByTopic(slug).then(({ articles }) => {
+    getArticlesByTopic(slug, 'created_at', 'desc').then(({ articles }) => {
       setArticles(articles);
     });
   }, [slug]);
 
+   //filter call for articles
+   const handleFormSubmit = (event) => {
+    event.preventDefault();
+   
+
+  
+    setSearchParams({sort_by: sortBy, order: order }) 
+    
+    getArticlesByTopic(slug, sortBy, order).then(({ articles }) => {
+      setArticles(articles);
+    });
+  };
+
   return (
     <section className='Articles__grid'>
       <h1 className="Articles__h1">{slug[0].toUpperCase() + slug.substring(1)} articles</h1>
+      <form className='articles__filter__form' onSubmit={handleFormSubmit}>
+        <label className='articles__filter__form__element' htmlFor="sort_by">Sort by: </label>
+        <select className='articles__filter__form__element' id="sort_by"  onChange={(event) => setSortBy(event.target.value)}>
+          <option value="created_at">Date</option>
+          <option value="title">Title</option>
+          <option value="votes">Number of votes</option>
+        </select>
+        <label className='articles__filter__form__element' htmlFor="order">Sort order: </label>
+        <select className='articles__filter__form__element' id="order" onChange={(event) => setOrder(event.target.value)}>
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+        <button className='articles__filter__form__element'  type="submit">Filter Articles</button>
+      </form>
       <ul>
         {articles.map((article) => {
           return (
