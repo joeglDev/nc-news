@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getArticles } from "../utils/index.js";
-import {Link} from 'react-router-dom';
+import {Link, useSearchParams} from 'react-router-dom';
 
 
 
@@ -8,16 +8,42 @@ const Articles = () => {
 
   //define article state
   const [articles, setArticles] = useState([]);
+   //define filter states 
+   const [sortBy, setSortBy] = useState('created_at');
+   const [order, setOrder] = useState('desc');
 
   useEffect(() => {
-    getArticles().then(({ articles }) => {
+    getArticles('created_at', 'desc').then(({ articles }) => {
       setArticles(articles);
     });
-  }, [articles]);
+  }, []);
+
+    //filter call for articles
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    
+    getArticles(sortBy, order).then(({ articles }) => {
+      setArticles(articles);
+    });
+  };
 
   return (
     <section className='Articles__grid'>
       <h1 className="Articles__h1">Articles</h1>
+      <form onSubmit={handleFormSubmit}>
+        <label htmlFor="sort_by">Sort by: </label>
+        <select id="sort_by"  onChange={(event) => setSortBy(event.target.value)}>
+          <option value="created_at">Date</option>
+          <option value="title">Title</option>
+          <option value="votes">Number of votes</option>
+        </select>
+        <label htmlFor="order">Sort order: </label>
+        <select id="order" onChange={(event) => setOrder(event.target.value)}>
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+        <button type="submit">Filter Articles</button>
+      </form>
       <ul>
         {articles.map((article) => {
           return (

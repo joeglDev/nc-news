@@ -1,6 +1,6 @@
-export const getArticles = () => {
+export const getArticles = (sortBy, order) => {
   return fetch(
-    "https://northcoders-backend-project-jg.herokuapp.com/api/articles"
+    `https://northcoders-backend-project-jg.herokuapp.com/api/articles?sort_by=${sortBy}&order=${order}`
   ).then((data) => {
     return data.json();
   });
