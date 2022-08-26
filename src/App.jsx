@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Topics from './components/Topics.jsx';
 import ArticleByTopic from './components/ArticleByTopic.jsx';
 import SingleArticle from './components/SingleArticle';
-import Errors from './components/Errors.jsx';
+import Errors from './components/errors/Errors.jsx';
 
 function App() {
 

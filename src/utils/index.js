@@ -77,11 +77,11 @@ export const deleteComment = (comment_id) => {
         "Content-Type": "application/json",
       },
     }
-  ).then(() => {
-    return true
-  }).catch((err) => {
-    return err
-  })
+  )
+    .then(() => {
+      return true;
+    })
+    .catch((err) => {
+      return err;
+    });
 };
-
-
