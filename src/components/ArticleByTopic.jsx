@@ -20,9 +20,7 @@ const ArticleByTopic = () => {
     getArticlesByTopic(slug, "created_at", "desc").then((data) => {
       //error handling if topic not found
       if (data.status === 404) {
-        Promise.reject(data.status).catch(() => {
-          setError(data.msg);
-        });
+        setError(data.msg);
       } else {
         setError(false);
         const articles = data.articles;
@@ -35,7 +33,7 @@ const ArticleByTopic = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-      //set new url
+    //set new url
     setSearchParams({ sort_by: sortBy, order: order });
 
     getArticlesByTopic(slug, sortBy, order).then(({ articles }) => {
