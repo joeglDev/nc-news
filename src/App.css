@@ -572,3 +572,8 @@ Nav select {
 .delete__comment__button:hover {
   background-color: rgb(55, 110, 230);
 }
+
+/*   404 error page   */
+.Errors__h2 {
+  text-align: center;
+}
