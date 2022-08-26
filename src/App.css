@@ -577,3 +577,45 @@ Nav select {
 .Errors__h {
   text-align: center;
 }
+
+/* Users */
+
+.User__card {
+  background-color: #333;
+  color: white;
+  margin: auto;
+  margin-bottom: 2vw;
+  padding: 2vw;
+  display: flex;
+  width: 80%;
+}
+
+.User__card:hover {
+  border-style: solid;
+  border-color: rgb(55, 110, 230);
+  border-width: large;
+}
+.User__card img {
+ height: 10vw;
+ width: 10vw;
+}
+
+.User__card p {
+  font-weight: bold;
+  font-size: 3vw;
+  margin:auto;
+}
+
+.User__card button {
+  border: none;
+  background-color: #222;
+  margin: auto;
+  margin-right: 2vw;
+  font-size: 3vw;
+  color: white;
+  padding: 2vw;
+}
+
+.User__card button:hover {
+  background-color: rgb(55, 110, 230);
+}

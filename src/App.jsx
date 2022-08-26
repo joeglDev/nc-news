@@ -6,6 +6,7 @@ import Topics from "./components/Topics.jsx";
 import ArticleByTopic from "./components/ArticleByTopic.jsx";
 import SingleArticle from "./components/SingleArticle";
 import Errors from "./components/errors/Errors.jsx";
+import Users from './components/Users.jsx';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             path="/articles/topics/:slug"
             element={<ArticleByTopic />}
           ></Route>
+          <Route path="/users" element={<Users/>}></Route>
           <Route path="*" element={<Errors />}></Route>
         </Routes>
       </BrowserRouter>

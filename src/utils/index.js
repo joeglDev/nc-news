@@ -85,3 +85,11 @@ export const deleteComment = (comment_id) => {
       return err;
     });
 };
+
+export const getUsers = () => {
+  return fetch(
+    "https://northcoders-backend-project-jg.herokuapp.com/api/users"
+  ).then((data) => {
+    return data.json();
+  });
+};
