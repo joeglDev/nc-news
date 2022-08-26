@@ -7,6 +7,7 @@ import {
   deleteComment,
 } from "../utils/index.js";
 import Comments from "./Comments.jsx";
+import ErrorHandling from "./errors/ErrorHandling.jsx";
 
 const currentUser = "Testing";
 
@@ -16,13 +17,23 @@ const currentUser = "Testing";
 const SingleArticle = () => {
   const { article_id } = useParams();
 
+  //error handling
+  const [error, setError] = useState(false);
+
   //get article data
   const [article, setArticle] = useState([]);
   useEffect(() => {
-    getArticle(article_id).then(({ article }) => {
-      setArticle(article);
+    getArticle(article_id).then((data) => {
+      //error handling if topic not found
+      if (data.status) {
+        setError(data.msg);
+      } else {
+        setError(false);
+        const article = data.article;
+        setArticle(article);
+      }
     });
-  }, [article_id]);
+  }, [article_id, error]);
 
   //get article comments and setNumberComment state for prop drilling to new comment
   //enables numComments to be optimistically rendered
@@ -31,11 +42,14 @@ const SingleArticle = () => {
   const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
-    getComments(article_id).then(({ comments }) => {
-      setComments(comments);
-      setNumComments(article.comment_count);
-    });
-  }, [article_id, article.comment_count]);
+    if (error) {
+    } else {
+      getComments(article_id).then(({ comments }) => {
+        setComments(comments);
+        setNumComments(article.comment_count);
+      });
+    }
+  }, [article_id, article.comment_count, error]);
 
   //process date for user
   const date = new Date(article.created_at);
@@ -85,12 +99,19 @@ const SingleArticle = () => {
       });
   };
 
-  {
-    if (isSending === true) {
-      return (
-        <div className="lds-facebook"><div></div><div></div><div></div></div>
-      );
-    }
+  if (isSending === true) {
+    return (
+      <div className="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
+  }
+
+  //error handling
+  if (error) {
+    return <ErrorHandling error={error}></ErrorHandling>;
   }
 
   //err handling
