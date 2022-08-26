@@ -1,23 +1,19 @@
-import { useState, useEffect } from "react";
-import { getUsers } from "../utils/index.js";
+import { useContext } from 'react';
+import {UserContext} from '../App.jsx';
 
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState('Testing')
 
-  useEffect(() => {
-    getUsers().then(({ users }) => {
-      console.log(users);
-      setUsers(users);
-    });
-  }, []);
+
+const Users = ({users}) => {
+
+    //import global context
+    const {currentUser, setCurrentUser} = useContext(UserContext);
+
+
 
   const changeUser = (username) => {
-    setCurrentUser(username);
+    setCurrentUser(username); 
     console.log(currentUser)
-
-
   };
 
   return (
@@ -29,7 +25,13 @@ const Users = () => {
             <li className="User__card" key={username}>
               <img alt={username} src={avatar_url}></img>
               <p>{username}</p>
-              <button onClick={() => {changeUser(username)}}>Select user</button>
+              <button
+                onClick={() => {
+                  changeUser(username);
+                }}
+              >
+                Select user
+              </button>
             </li>
           );
         })}
